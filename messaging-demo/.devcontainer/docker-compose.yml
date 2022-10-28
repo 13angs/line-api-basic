@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  la-messaging-demo:
+    build:
+      context: ..
+      dockerfile: ./.devcontainer/Dockerfile
+      args:
+        - "VARIANT=3.10-bullseye"
+        - "NODE_VERSION=lts/*"
+    
+    volumes:
+      - ../..:/workspaces/line-api-basic:cached
+      - /var/run/docker.sock:/var/run/docker.sock
+    
+    command: sleep infinity
