@@ -14,3 +14,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     
     command: sleep infinity
+
+    networks:
+      - la-network
+
+networks:
+  la-network:
+    name: la-network
+    external: true
