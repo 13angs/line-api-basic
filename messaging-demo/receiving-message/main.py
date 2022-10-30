@@ -12,6 +12,7 @@ CHANNEL_ID=os.environ['CHANNEL_ID']
 RABBITMQ_HOST=os.environ['RABBITMQ_HOST']
 EXCHANGE=os.environ['EXCHANGE']
 ROUTING_KEY=os.environ['ROUTING_KEY']
+ACCESS_TOKEN=os.environ['ACCESS_TOKEN']
 
 app = Flask(__name__)
 
@@ -40,6 +41,6 @@ if __name__ == '__main__':
     flask_proc = multiprocessing.Process(target=app.run, args=('0.0.0.0', 5000, True))
     flask_proc.start()
 
-    gud = GetUserData(RABBITMQ_HOST, EXCHANGE, 'topic', 'get_user_data_queue', ROUTING_KEY)
+    gud = GetUserData(RABBITMQ_HOST, EXCHANGE, 'topic', 'get_user_data_queue', ROUTING_KEY, ACCESS_TOKEN)
     gud_proc = multiprocessing.Process(target=gud.run)
     gud_proc.start()
