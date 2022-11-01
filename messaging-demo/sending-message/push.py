@@ -20,22 +20,22 @@ body = {
             "type": "text",
             "text": "From python!!"
         },
-        {
-            "type": "text",
-            "text": "$ Is there anything I can help?🐱",
-            "emojis": [
-                {
-                    "index": 0,
-                    "productId": "5ac1bfd5040ab15980c9b435",
-                    "emojiId": "001"
-                }
-            ]
-        },
-        {
-            "type": "sticker",
-            "packageId": "446",
-            "stickerId": "1988"
-        }
+        # {
+        #     "type": "text",
+        #     "text": "$ Is there anything I can help?🐱",
+        #     "emojis": [
+        #         {
+        #             "index": 0,
+        #             "productId": "5ac1bfd5040ab15980c9b435",
+        #             "emojiId": "001"
+        #         }
+        #     ]
+        # },
+        # {
+        #     "type": "sticker",
+        #     "packageId": "446",
+        #     "stickerId": "1988"
+        # }
     ]
 }
 res = requests.post(url=URL, headers=headers, json=body)

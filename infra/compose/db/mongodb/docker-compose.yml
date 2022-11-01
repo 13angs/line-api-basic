@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  la-mongo-db:
+    image: mongo
+    container_name: la-mongo-db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: P4ssw0rd
+    
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
+    
+    networks:
+      - la-network
+  
+  la-mongo-express:
+    image: mongo-express
+    container_name: la-mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: P4ssw0rd
+      ME_CONFIG_MONGODB_URL: mongodb://root:P4ssw0rd@la-mongo-db:27017/
+    
+    networks:
+      - la-network
+
+networks:
+  la-network:
+    name: la-network
+    external: true

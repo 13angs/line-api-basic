@@ -1,6 +1,17 @@
 import json, requests, os
 from pathlib import Path
 from pub_sub_client import Subscriber
+import pymongo
+from dotenv import load_dotenv
+
+load_dotenv('../.env')
+
+MONGO_HOST=os.environ['MONGO_HOST']
+
+# save to db
+client = pymongo.MongoClient(MONGO_HOST)
+db = client['line_api_db']
+db_coll = db['messages']
 
 class GetUserData(Subscriber):
     output_path = './output'
@@ -41,6 +52,11 @@ class GetUserData(Subscriber):
 
     def get_contents(self, message: dict):
         events = message['events']
+
+        try:
+            db_coll.insert_one(message)
+        except:
+            print('Error')
 
         for event in events:
             msg_id = event['message']['id']
